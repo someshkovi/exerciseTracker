@@ -15,7 +15,7 @@ class Exercise(models.Model):
     name = models.CharField(max_length=200)
     body_part_primary = models.ForeignKey(BodyPart, on_delete=models.CASCADE)
     other_body_parts = models.CharField(max_length=200, null=True,blank=True)
-    view_link = models.CharField(max_length=500, null=True,blank=True)
+    view_link = models.URLField(max_length=500, null=True,blank=True)
 
     class Meta:
         ordering = ['body_part_primary','name']
@@ -29,7 +29,7 @@ class ExerciseTracker(models.Model):
     count = models.PositiveIntegerField(null=True, blank=True)
     repetitions = models.PositiveIntegerField(default=1)
     weight = models.PositiveIntegerField(null=True, blank=True)
-    view_link = models.CharField(max_length=500, null=True,blank=True)
+    view_link = models.URLField(max_length=500, null=True,blank=True)
     duration = models.PositiveIntegerField(null=True, blank=True)
 
 
