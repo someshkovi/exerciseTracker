@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import MinValueValidator
 from decimal import Decimal
+from django.conf import settings
 # from embed_video.fields import EmbedVideoField
 
 # Create your models here.
@@ -37,15 +38,18 @@ class ExerciseTracker(models.Model):
                                     validators=[MinValueValidator(Decimal('0.01'))],
                                     null=True,
                                     blank=True)
-    view_link = models.URLField(max_length=500, null=True,blank=True)
     duration = models.DecimalField(max_digits=4,
                                     decimal_places=2,
                                     validators=[MinValueValidator(Decimal('0.01'))],
                                     null=True,
                                     blank=True)
+    remarks = models.TextField(null=True,blank=True)
+    trainee = models.ForeignKey(settings.AUTH_USER_MODEL,
+            null=True, blank=True, on_delete=models.SET_NULL)
 
     class Meta:
         ordering = ['time','exercise']
 
     def __str__(self):
         return f'{self.exercise}, {self.time}'
+    
